@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResumiPDF · Entendé tus apuntes más rápido</title>
-  <meta name="description" content="Subí tu PDF y recibí un resumen, conceptos clave y preguntas para estudiar.">
+  <meta name="description" content="Subí tu PDF y recibí un resumen automático, conceptos clave y preguntas para estudiar.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,29 +15,62 @@
   <main>
     <section class="hero">
       <h1>Entendé tus apuntes más rápido</h1>
-      <p>Subí tu PDF y recibí al instante un resumen, los conceptos clave y preguntas para estudiar. Tu archivo se procesa en tu propio navegador y no se guarda en ningún lado.</p>
-      <button id="btn-subir" class="boton-grande">Subir mi PDF</button>
-      <input id="archivo" type="file" accept="application/pdf" hidden>
-      <ul class="notas">
-        <li>🔒 Tu PDF se procesa en tu dispositivo y no se guarda</li>
-        <li>📄 Funciona mejor con PDFs que tienen texto seleccionable</li>
-        <li>📏 Tamaño máximo: 20 MB</li>
-      </ul>
-      <div id="cargando" class="cargando" role="status" aria-live="polite" hidden>
-        <span class="spinner"></span>
-        <p id="cargando-texto"></p>
+      <p>Subí tu PDF y recibí un resumen automático, los conceptos clave y preguntas para estudiar.</p>
+      <p class="privacidad">🔒 El PDF se procesa en tu dispositivo y no se guarda</p>
+
+      <div id="zona" class="zona">
+        <p class="zona-titulo">Arrastrá tu PDF acá</p>
+        <p class="zona-o">o</p>
+        <button id="btn-subir" class="boton-grande" type="button">Subir mi PDF</button>
+        <input id="archivo" type="file" accept="application/pdf,.pdf" hidden>
+        <p class="zona-info">Máximo 20 MB y 80 páginas · Funciona mejor con PDFs que tienen texto seleccionable</p>
       </div>
-      <p id="estado" class="estado" role="status" aria-live="polite"></p>
+
+      <div id="archivo-info" class="archivo" hidden>
+        <div class="archivo-datos">
+          <strong id="arch-nombre"></strong>
+          <span id="arch-detalle"></span>
+        </div>
+        <button id="btn-otro" class="boton-sec" type="button" hidden>Elegir otro PDF</button>
+      </div>
+
+      <div id="progreso" class="progreso" hidden>
+        <progress id="barra" max="100" value="0" aria-label="Progreso de lectura"></progress>
+        <p id="progreso-texto" role="status" aria-live="polite"></p>
+        <button id="btn-cancelar-2" class="boton-sec" type="button">Cancelar</button>
+      </div>
+
+      <div id="mensaje" class="aviso" role="alert" hidden>
+        <strong id="msg-titulo"></strong>
+        <p id="msg-texto"></p>
+      </div>
     </section>
 
     <section id="resultado" class="resultado" hidden>
       <article class="tarjeta">
         <h2>📝 Resumen</h2>
+        <div class="controles">
+          <label for="longitud">Longitud:</label>
+          <select id="longitud">
+            <option value="corto">Corto</option>
+            <option value="medio" selected>Medio</option>
+            <option value="detallado">Detallado</option>
+          </select>
+        </div>
         <p id="res-resumen"></p>
+        <div class="acciones">
+          <button id="btn-copiar" class="boton-sec" type="button">Copiar resumen</button>
+          <button id="btn-descargar" class="boton-sec" type="button">Descargar resumen</button>
+        </div>
       </article>
       <article class="tarjeta">
         <h2>🔑 Conceptos clave</h2>
         <ul id="res-conceptos" class="etiquetas"></ul>
+      </article>
+      <article class="tarjeta">
+        <h2>🃏 Tarjetas de estudio</h2>
+        <p class="ayuda">Tocá una tarjeta para ver la explicación.</p>
+        <div id="res-tarjetas" class="flashcards"></div>
       </article>
       <article class="tarjeta">
         <h2>❓ Preguntas para estudiar</h2>
