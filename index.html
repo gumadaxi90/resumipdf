@@ -18,7 +18,16 @@
       <p>Subí tu PDF y recibí al instante un resumen, los conceptos clave y preguntas para estudiar. Tu archivo se procesa en tu propio navegador y no se guarda en ningún lado.</p>
       <button id="btn-subir" class="boton-grande">Subir mi PDF</button>
       <input id="archivo" type="file" accept="application/pdf" hidden>
-      <p id="estado" class="estado"></p>
+      <ul class="notas">
+        <li>🔒 Tu PDF se procesa en tu dispositivo y no se guarda</li>
+        <li>📄 Funciona mejor con PDFs que tienen texto seleccionable</li>
+        <li>📏 Tamaño máximo: 20 MB</li>
+      </ul>
+      <div id="cargando" class="cargando" role="status" aria-live="polite" hidden>
+        <span class="spinner"></span>
+        <p id="cargando-texto"></p>
+      </div>
+      <p id="estado" class="estado" role="status" aria-live="polite"></p>
     </section>
 
     <section id="resultado" class="resultado" hidden>

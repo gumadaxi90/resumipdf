@@ -55,6 +55,50 @@ body {
 
 .estado { font-size: 15px !important; margin: 16px auto 0 !important; }
 
+.notas {
+  list-style: none;
+  margin: 22px auto 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  color: var(--suave);
+  font-size: 15px;
+}
+
+.cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto 0;
+  padding: 14px 20px;
+  max-width: 460px;
+  background: var(--color-claro);
+  border-radius: 14px;
+}
+.cargando[hidden] { display: none; }
+.hero .cargando p { margin: 0; color: var(--color); font-size: 16px; font-weight: 600; text-align: left; }
+
+.spinner {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(79, 70, 229, 0.25);
+  border-top-color: var(--color);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .hero { padding: 36px 0 28px; }
+  .hero p { font-size: 17px; }
+  .boton-grande { width: 100%; padding: 18px 20px; font-size: 19px; }
+  .notas { font-size: 14px; text-align: left; }
+  .tarjeta { padding: 20px; }
+  .beneficios h2 { font-size: 26px; }
+}
+
 .tarjeta {
   background: var(--tarjeta);
   border: 1px solid var(--borde);
@@ -65,6 +109,7 @@ body {
 .tarjeta p { margin: 0; color: var(--suave); }
 
 .resultado { display: grid; gap: 16px; margin-bottom: 40px; }
+.resultado[hidden] { display: none; }
 .resultado .tarjeta p { color: var(--texto); }
 .resultado ol { margin: 0; padding-left: 20px; }
 .resultado li { margin-bottom: 8px; }

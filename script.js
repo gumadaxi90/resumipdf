@@ -5,6 +5,7 @@ const $ = (id) => document.getElementById(id);
 const boton = $("btn-subir");
 const entrada = $("archivo");
 const estado = $("estado");
+const LIMITE_MB = 20; // tamaño máximo del PDF
 
 // Palabras comunes que no cuentan como conceptos
 const IGNORAR = new Set(
@@ -21,12 +22,25 @@ entrada.addEventListener("change", async () => {
     return;
   }
 
+  if (archivo.size > LIMITE_MB * 1024 * 1024) {
+    const mb = (archivo.size / (1024 * 1024)).toFixed(1).replace(".", ",");
+    estado.textContent = "Tu PDF pesa " + mb + " MB y el límite es de " + LIMITE_MB + " MB. Probá con uno más liviano o dividilo en partes.";
+    entrada.value = "";
+    return;
+  }
+
   boton.disabled = true;
-  estado.textContent = "Leyendo tu PDF…";
+  estado.textContent = "";
   $("resultado").hidden = true;
+  $("cargando").hidden = false;
+  $("cargando-texto").textContent = "¡Genial! Estamos leyendo tu PDF…";
 
   try {
-    const texto = await leerPdf(archivo);
+    const texto = await leerPdf(archivo, (n, total) => {
+      $("cargando-texto").textContent = "Leyendo tu PDF… página " + n + " de " + total;
+    });
+    $("cargando-texto").textContent = "Armando tu resumen, ya casi está…";
+    await new Promise((r) => setTimeout(r, 50));
     if (texto.split(/\s+/).length < 30) {
       estado.textContent = "No encontré suficiente texto. Puede ser un PDF escaneado (imagen).";
       return;
@@ -37,15 +51,17 @@ entrada.addEventListener("change", async () => {
   } catch (error) {
     estado.textContent = "No pude leer ese PDF. Probá con otro archivo.";
   } finally {
+    $("cargando").hidden = true;
     boton.disabled = false;
     entrada.value = "";
   }
 });
 
-async function leerPdf(archivo) {
+async function leerPdf(archivo, progreso) {
   const pdf = await pdfjsLib.getDocument({ data: await archivo.arrayBuffer() }).promise;
   let texto = "";
   for (let i = 1; i <= pdf.numPages; i++) {
+    if (progreso) progreso(i, pdf.numPages);
     const pagina = await pdf.getPage(i);
     const contenido = await pagina.getTextContent();
     texto += contenido.items.map((x) => x.str).join(" ") + " ";
