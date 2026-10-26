@@ -1,0 +1,87 @@
+:root {
+  --fondo: #f7f8fc;
+  --tarjeta: #ffffff;
+  --texto: #1b1d2a;
+  --suave: #5d6275;
+  --borde: #e3e5ef;
+  --color: #4f46e5;
+  --color-claro: #eceafe;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.barra, main, footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.barra { padding-top: 20px; padding-bottom: 10px; }
+.logo { font-size: 22px; font-weight: 800; }
+.logo span { color: var(--color); }
+
+.hero { text-align: center; padding: 56px 0 40px; }
+.hero h1 {
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.1;
+  margin: 0 0 18px;
+  letter-spacing: -0.03em;
+}
+.hero p { color: var(--suave); font-size: 19px; max-width: 620px; margin: 0 auto 28px; }
+
+.boton-grande {
+  background: var(--color);
+  color: #fff;
+  border: 0;
+  border-radius: 14px;
+  padding: 18px 40px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+  transition: transform 0.15s;
+}
+.boton-grande:hover { transform: translateY(-2px); }
+.boton-grande:disabled { opacity: 0.6; cursor: wait; }
+
+.estado { font-size: 15px !important; margin: 16px auto 0 !important; }
+
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 24px;
+}
+.tarjeta h2, .tarjeta h3 { margin: 0 0 10px; }
+.tarjeta p { margin: 0; color: var(--suave); }
+
+.resultado { display: grid; gap: 16px; margin-bottom: 40px; }
+.resultado .tarjeta p { color: var(--texto); }
+.resultado ol { margin: 0; padding-left: 20px; }
+.resultado li { margin-bottom: 8px; }
+
+.etiquetas { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.etiquetas li {
+  background: var(--color-claro);
+  color: var(--color);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.beneficios { padding: 20px 0 50px; }
+.beneficios h2 { text-align: center; font-size: 30px; margin: 0 0 24px; }
+.grilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.icono { font-size: 32px; margin-bottom: 8px; }
+
+footer { text-align: center; color: var(--suave); font-size: 14px; padding-top: 24px; padding-bottom: 40px; border-top: 1px solid var(--borde); }

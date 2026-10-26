@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResumiPDF · Entendé tus apuntes más rápido</title>
+  <meta name="description" content="Subí tu PDF y recibí un resumen, conceptos clave y preguntas para estudiar.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="logo">Resumi<span>PDF</span></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Entendé tus apuntes más rápido</h1>
+      <p>Subí tu PDF y recibí al instante un resumen, los conceptos clave y preguntas para estudiar. Tu archivo se procesa en tu propio navegador y no se guarda en ningún lado.</p>
+      <button id="btn-subir" class="boton-grande">Subir mi PDF</button>
+      <input id="archivo" type="file" accept="application/pdf" hidden>
+      <p id="estado" class="estado"></p>
+    </section>
+
+    <section id="resultado" class="resultado" hidden>
+      <article class="tarjeta">
+        <h2>📝 Resumen</h2>
+        <p id="res-resumen"></p>
+      </article>
+      <article class="tarjeta">
+        <h2>🔑 Conceptos clave</h2>
+        <ul id="res-conceptos" class="etiquetas"></ul>
+      </article>
+      <article class="tarjeta">
+        <h2>❓ Preguntas para estudiar</h2>
+        <ol id="res-preguntas"></ol>
+      </article>
+    </section>
+
+    <section class="beneficios">
+      <h2>¿Por qué ResumiPDF?</h2>
+      <div class="grilla">
+        <article class="tarjeta">
+          <div class="icono">⚡</div>
+          <h3>Resumen rápido</h3>
+          <p>Las ideas principales de tus apuntes en segundos, sin leer todo de nuevo.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono">🔑</div>
+          <h3>Conceptos clave</h3>
+          <p>Identificá los términos que más importan para no perderte en el texto.</p>
+        </article>
+        <article class="tarjeta">
+          <div class="icono">🎯</div>
+          <h3>Preguntas para estudiar</h3>
+          <p>Practicá con preguntas armadas a partir de tu propio material.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 ResumiPDF · Hecho para estudiantes</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
